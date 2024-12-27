@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Flashcard } from './flashcard.entity';
+import { Group } from './group.entity';
 
 @Entity()
 export class User {
@@ -13,4 +15,9 @@ export class User {
 
   @Column()
   lastName: string;
+
+  @OneToMany((_type) => Group, (group) => group.user, {
+    eager: true,
+  })
+  groups: Group[];
 }
