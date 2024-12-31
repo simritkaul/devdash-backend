@@ -20,4 +20,9 @@ export class User {
     eager: true,
   })
   groups: Group[];
+
+  @OneToMany((_type) => Flashcard, (flashcard) => flashcard.user, {
+    eager: true,
+  })
+  flashcards: Flashcard[];
 }

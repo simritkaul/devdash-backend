@@ -1,9 +1,11 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Flashcard } from './flashcard.entity';
 import { User } from './user.entity';
@@ -16,17 +18,17 @@ export class Group {
   @Column({ unique: true })
   name: string;
 
+  @ManyToOne((_type) => User, (user) => user.groups, { onDelete: 'CASCADE' })
+  user: User;
+
   @OneToMany((_type) => Flashcard, (flashcard) => flashcard.group, {
     eager: true,
   })
   flashcards: Flashcard[];
 
-  @ManyToOne((_type) => User, (user) => user.groups)
-  user: User;
+  @CreateDateColumn()
+  createdAt: Date;
 
-  @Column()
-  isPublic: boolean;
-
-  @Column()
-  isAnonymous: boolean;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

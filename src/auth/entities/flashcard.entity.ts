@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 import { Group } from './group.entity';
 
@@ -7,18 +14,27 @@ export class Flashcard {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ length: 500 })
   front: string;
 
-  @Column({ nullable: true })
+  @Column({ length: 200, nullable: true })
   back: string;
+
+  @Column({ length: 2000, nullable: true })
+  notes: string;
 
   @ManyToOne((_type) => Group, (group) => group.flashcards, { eager: false })
   group: Group;
 
-  @Column()
+  @ManyToOne((_type) => User, (user) => user.flashcards, { eager: false })
+  user: User;
+
+  @Column({ default: false })
   isPublic: boolean;
 
-  @Column()
-  isAnonymous: boolean;
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
