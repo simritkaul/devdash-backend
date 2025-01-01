@@ -12,12 +12,9 @@ export class AuthService {
   ) {}
 
   async validateUser(userDetails: UserDetails) {
-    console.log('AuthService userDetails: ', userDetails);
-
     const user = await this.userRepository.findOneBy({
       email: userDetails?.email,
     });
-    console.log(user);
     if (user) return user;
 
     const newUser = this.userRepository.create(userDetails);
