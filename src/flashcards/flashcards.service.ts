@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class FlashcardsService {
   async getFlashcards() {
-    return null;
+    return 'Hello world';
   }
 
   async createFlashcard() {

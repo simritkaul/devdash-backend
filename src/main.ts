@@ -14,7 +14,7 @@ async function bootstrap() {
       saveUninitialized: false,
       resave: false,
       cookie: {
-        maxAge: configService.get('SESSION_COOKIE_MAXAGE'),
+        maxAge: Number(configService.get('SESSION_COOKIE_MAXAGE')),
       },
     }),
   );
